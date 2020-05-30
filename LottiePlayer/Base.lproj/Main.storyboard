@@ -701,10 +701,10 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--View Controller-->
+        <!--Player View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="LottiePlayer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="PlayerViewController" customModule="LottiePlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -737,11 +737,10 @@
                                 <subviews>
                                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="erj-1Q-mIY">
                                         <rect key="frame" x="18" y="7" width="444" height="19"/>
-                                        <sliderCell key="cell" continuous="YES" alignment="left" maxValue="1" tickMarkPosition="above" sliderType="linear" id="DFc-KR-uth">
-                                            <connections>
-                                                <action selector="sliderAction:" target="XfG-lQ-9wD" id="H4e-Mp-CVi"/>
-                                            </connections>
-                                        </sliderCell>
+                                        <sliderCell key="cell" continuous="YES" alignment="left" maxValue="1" tickMarkPosition="above" sliderType="linear" id="DFc-KR-uth"/>
+                                        <connections>
+                                            <action selector="sliderAction:" target="XfG-lQ-9wD" id="GYg-OZ-gMG"/>
+                                        </connections>
                                     </slider>
                                 </subviews>
                                 <constraints>

@@ -7,14 +7,12 @@
 //
 
 import Cocoa
+import Combine
 import os.log
 
-protocol DraggingDestinationViewDelegate: class {
-    func draggingDestinationView(draggedFileURL: URL)
-}
-
 final class DraggingDestinationView: NSView {
-    weak var delegate: DraggingDestinationViewDelegate?
+    let draggedFileURL = PassthroughSubject<URL, Never>()
+
     private var isDragging: Bool = false
     private let log = OSLog(subsystem: Bundle.main.bundleIdentifier!, category: "Dragging")
     @IBOutlet private weak var label: NSTextField!
@@ -73,7 +71,7 @@ final class DraggingDestinationView: NSView {
         // Do something
         os_log(.default, log: log, "url: %@", url.absoluteString)
         label.isHidden = true
-        delegate?.draggingDestinationView(draggedFileURL: url)
+        draggedFileURL.send(url)
         return true
     }
 

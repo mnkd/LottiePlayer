@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		46E65DCF2822C91119659F72 /* Pods_LottiePlayer_LottiePlayerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A058D23CEDDB9063708879B /* Pods_LottiePlayer_LottiePlayerUITests.framework */; };
 		4D0CAC5E2481A48A00DC2BFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0CAC5D2481A48A00DC2BFC /* AppDelegate.swift */; };
-		4D0CAC602481A48A00DC2BFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0CAC5F2481A48A00DC2BFC /* ViewController.swift */; };
+		4D0CAC602481A48A00DC2BFC /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0CAC5F2481A48A00DC2BFC /* PlayerViewController.swift */; };
 		4D0CAC622481A48B00DC2BFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D0CAC612481A48B00DC2BFC /* Assets.xcassets */; };
 		4D0CAC652481A48B00DC2BFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D0CAC632481A48B00DC2BFC /* Main.storyboard */; };
 		4D0CAC712481A48C00DC2BFC /* LottiePlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0CAC702481A48C00DC2BFC /* LottiePlayerTests.swift */; };
@@ -18,6 +18,7 @@
 		4D14B4312481AAAD00A3F8D4 /* DraggingDestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D14B4302481AAAD00A3F8D4 /* DraggingDestinationView.swift */; };
 		4D14B43724822C8D00A3F8D4 /* PlayerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D14B43624822C8D00A3F8D4 /* PlayerWindow.swift */; };
 		4D14B4392482377200A3F8D4 /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D14B4382482377200A3F8D4 /* KeyCode.swift */; };
+		4D804FB9248286DB00F37773 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D804FB8248286DB00F37773 /* PlayerViewModel.swift */; };
 		809DAC0BCFCF4785EA9ADB3D /* Pods_LottiePlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 452BEE0D240A4230E9D2EB60 /* Pods_LottiePlayer.framework */; };
 		E2B6538BBFFBD90909AE90E4 /* Pods_LottiePlayerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B6FC2E2688D0E53DFB0DA2 /* Pods_LottiePlayerTests.framework */; };
 /* End PBXBuildFile section */
@@ -47,7 +48,7 @@
 		452BEE0D240A4230E9D2EB60 /* Pods_LottiePlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LottiePlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D0CAC5A2481A48A00DC2BFC /* LottiePlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LottiePlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D0CAC5D2481A48A00DC2BFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4D0CAC5F2481A48A00DC2BFC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4D0CAC5F2481A48A00DC2BFC /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		4D0CAC612481A48B00DC2BFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4D0CAC642481A48B00DC2BFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4D0CAC662481A48B00DC2BFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,6 +63,7 @@
 		4D14B4302481AAAD00A3F8D4 /* DraggingDestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggingDestinationView.swift; sourceTree = "<group>"; };
 		4D14B43624822C8D00A3F8D4 /* PlayerWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerWindow.swift; sourceTree = "<group>"; };
 		4D14B4382482377200A3F8D4 /* KeyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
+		4D804FB8248286DB00F37773 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 		8A058D23CEDDB9063708879B /* Pods_LottiePlayer_LottiePlayerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LottiePlayer_LottiePlayerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9089351C80A189BF200D77C1 /* Pods-LottiePlayerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LottiePlayerTests.release.xcconfig"; path = "Target Support Files/Pods-LottiePlayerTests/Pods-LottiePlayerTests.release.xcconfig"; sourceTree = "<group>"; };
 		9BF2F04480BCCF605C08300D /* Pods-LottiePlayer-LottiePlayerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LottiePlayer-LottiePlayerUITests.release.xcconfig"; path = "Target Support Files/Pods-LottiePlayer-LottiePlayerUITests/Pods-LottiePlayer-LottiePlayerUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -155,8 +157,9 @@
 				4D14B4302481AAAD00A3F8D4 /* DraggingDestinationView.swift */,
 				4D14B4382482377200A3F8D4 /* KeyCode.swift */,
 				4D14B42C2481A7D900A3F8D4 /* PlayerView.swift */,
+				4D0CAC5F2481A48A00DC2BFC /* PlayerViewController.swift */,
+				4D804FB8248286DB00F37773 /* PlayerViewModel.swift */,
 				4D14B43624822C8D00A3F8D4 /* PlayerWindow.swift */,
-				4D0CAC5F2481A48A00DC2BFC /* ViewController.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -425,8 +428,9 @@
 				4D14B43724822C8D00A3F8D4 /* PlayerWindow.swift in Sources */,
 				4D14B4312481AAAD00A3F8D4 /* DraggingDestinationView.swift in Sources */,
 				4D14B42D2481A7D900A3F8D4 /* PlayerView.swift in Sources */,
-				4D0CAC602481A48A00DC2BFC /* ViewController.swift in Sources */,
+				4D0CAC602481A48A00DC2BFC /* PlayerViewController.swift in Sources */,
 				4D14B4392482377200A3F8D4 /* KeyCode.swift in Sources */,
+				4D804FB9248286DB00F37773 /* PlayerViewModel.swift in Sources */,
 				4D0CAC5E2481A48A00DC2BFC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

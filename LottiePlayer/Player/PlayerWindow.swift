@@ -7,9 +7,10 @@
 //
 
 import Cocoa
+import Combine
 
 class PlayerWindow: NSWindow {
-    var handler: ((NSEvent) -> Void)?
+    let keyDownEvent = PassthroughSubject<NSEvent, Never>()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -18,6 +19,6 @@ class PlayerWindow: NSWindow {
 
     override func keyDown(with event: NSEvent) {
         super.keyDown(with: event)
-        handler?(event)
+        keyDownEvent.send(event)
     }
 }
