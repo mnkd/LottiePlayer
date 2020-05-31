@@ -18,6 +18,15 @@ class PlayerViewController: NSViewController {
     private var subscriptions = Set<AnyCancellable>()
     private let viewModel = PlayerViewModel()
 
+    override var representedObject: Any? {
+        didSet {
+            if let content = representedObject as? Content {
+                self.draggingDestinationView.isLabelHidden = true
+                self.viewModel.fileURL = content.url
+            }
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,10 +35,7 @@ class PlayerViewController: NSViewController {
             .store(in: &subscriptions)
 
         viewModel.changeAnimation
-            .sink { url in
-                self.playerView.setUpAnimation(filePath: url.path)
-                self.playerView.play()
-            }
+            .sink { self.playerView.setUpAnimation(filePath: $0.path) }
             .store(in: &subscriptions)
 
         viewModel.changeProgress

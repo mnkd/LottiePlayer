@@ -19,6 +19,8 @@
 		4D14B43724822C8D00A3F8D4 /* PlayerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D14B43624822C8D00A3F8D4 /* PlayerWindow.swift */; };
 		4D14B4392482377200A3F8D4 /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D14B4382482377200A3F8D4 /* KeyCode.swift */; };
 		4D804FB9248286DB00F37773 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D804FB8248286DB00F37773 /* PlayerViewModel.swift */; };
+		4DDFDAE62483974F0065B486 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDFDAE42483974E0065B486 /* Content.swift */; };
+		4DDFDAE72483974F0065B486 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDFDAE52483974E0065B486 /* Document.swift */; };
 		809DAC0BCFCF4785EA9ADB3D /* Pods_LottiePlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 452BEE0D240A4230E9D2EB60 /* Pods_LottiePlayer.framework */; };
 		E2B6538BBFFBD90909AE90E4 /* Pods_LottiePlayerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B6FC2E2688D0E53DFB0DA2 /* Pods_LottiePlayerTests.framework */; };
 /* End PBXBuildFile section */
@@ -64,6 +66,8 @@
 		4D14B43624822C8D00A3F8D4 /* PlayerWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerWindow.swift; sourceTree = "<group>"; };
 		4D14B4382482377200A3F8D4 /* KeyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
 		4D804FB8248286DB00F37773 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
+		4DDFDAE42483974E0065B486 /* Content.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
+		4DDFDAE52483974E0065B486 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		8A058D23CEDDB9063708879B /* Pods_LottiePlayer_LottiePlayerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LottiePlayer_LottiePlayerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9089351C80A189BF200D77C1 /* Pods-LottiePlayerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LottiePlayerTests.release.xcconfig"; path = "Target Support Files/Pods-LottiePlayerTests/Pods-LottiePlayerTests.release.xcconfig"; sourceTree = "<group>"; };
 		9BF2F04480BCCF605C08300D /* Pods-LottiePlayer-LottiePlayerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LottiePlayer-LottiePlayerUITests.release.xcconfig"; path = "Target Support Files/Pods-LottiePlayer-LottiePlayerUITests/Pods-LottiePlayer-LottiePlayerUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -154,6 +158,8 @@
 		4D14B43A24824BF100A3F8D4 /* Player */ = {
 			isa = PBXGroup;
 			children = (
+				4DDFDAE42483974E0065B486 /* Content.swift */,
+				4DDFDAE52483974E0065B486 /* Document.swift */,
 				4D14B4302481AAAD00A3F8D4 /* DraggingDestinationView.swift */,
 				4D14B4382482377200A3F8D4 /* KeyCode.swift */,
 				4D14B42C2481A7D900A3F8D4 /* PlayerView.swift */,
@@ -428,7 +434,9 @@
 				4D14B43724822C8D00A3F8D4 /* PlayerWindow.swift in Sources */,
 				4D14B4312481AAAD00A3F8D4 /* DraggingDestinationView.swift in Sources */,
 				4D14B42D2481A7D900A3F8D4 /* PlayerView.swift in Sources */,
+				4DDFDAE62483974F0065B486 /* Content.swift in Sources */,
 				4D0CAC602481A48A00DC2BFC /* PlayerViewController.swift in Sources */,
+				4DDFDAE72483974F0065B486 /* Document.swift in Sources */,
 				4D14B4392482377200A3F8D4 /* KeyCode.swift in Sources */,
 				4D804FB9248286DB00F37773 /* PlayerViewModel.swift in Sources */,
 				4D0CAC5E2481A48A00DC2BFC /* AppDelegate.swift in Sources */,

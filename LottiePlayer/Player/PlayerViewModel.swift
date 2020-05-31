@@ -27,6 +27,10 @@ final class PlayerViewModel {
             if let url = fileURL {
                 windowTitle = url.lastPathComponent
                 changeAnimation.send(url)
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.changeProgress.send(ProgressRange(from: 0, to: 1))
+                }
             }
         }
     }

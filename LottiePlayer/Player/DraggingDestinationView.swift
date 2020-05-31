@@ -14,6 +14,11 @@ final class DraggingDestinationView: NSView {
     let droppedFileURL = PassthroughSubject<URL, Never>()
 
     private var isDragging: Bool = false
+    var isLabelHidden: Bool = false {
+        didSet {
+            label.isHidden = isLabelHidden
+        }
+    }
     private let log = OSLog(subsystem: Bundle.main.bundleIdentifier!, category: "Dragging")
     @IBOutlet private weak var label: NSTextField!
 
