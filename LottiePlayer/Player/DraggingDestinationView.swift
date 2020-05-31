@@ -15,7 +15,7 @@ final class DraggingDestinationView: NSView {
 
     var isLabelHidden: Bool = false {
         didSet {
-            label.isHidden = isLabelHidden
+            dropHereView.isHidden = isLabelHidden
         }
     }
 
@@ -27,8 +27,7 @@ final class DraggingDestinationView: NSView {
 
     private let log = OSLog(subsystem: Bundle.main.bundleIdentifier!, category: "Dragging")
     private let logType: OSLogType = .debug
-
-    @IBOutlet private weak var label: NSTextField!
+    @IBOutlet private weak var dropHereView: NSView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -75,7 +74,7 @@ final class DraggingDestinationView: NSView {
         }
 
         os_log(logType, log: log, "url: %@", url.absoluteString)
-        label.isHidden = true
+        dropHereView.isHidden = true
         droppedFileURL.send(url)
         return true
     }

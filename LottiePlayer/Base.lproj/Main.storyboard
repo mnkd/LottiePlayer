@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -715,20 +716,47 @@
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="yCb-n0-BMK" customClass="DraggingDestinationView" customModule="LottiePlayer" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="32" width="480" height="238"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sOa-AE-tny">
-                                        <rect key="frame" x="128" y="108" width="225" height="23"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="👇 Drop .json file here 👇" id="Lab-ak-EHP">
-                                            <font key="font" metaFont="system" size="20"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="40R-w1-dxQ" userLabel="Drop Here View">
+                                        <rect key="frame" x="140" y="69" width="200" height="100"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sOa-AE-tny">
+                                                <rect key="frame" x="0.0" y="12" width="200" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="x0d-Ep-gTc"/>
+                                                </constraints>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Drop a Lottie FIle here to play" id="Lab-ak-EHP">
+                                                    <font key="font" size="14" name="HelveticaNeue"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="c96-by-P9e">
+                                                <rect key="frame" x="76" y="44" width="48" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="48" id="FpV-AT-wYb"/>
+                                                    <constraint firstAttribute="height" constant="48" id="n58-VW-Xyx"/>
+                                                </constraints>
+                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="arrow.down.doc" id="BI7-xs-niv"/>
+                                                <color key="contentTintColor" name="lottie-contrast"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="1K0-80-qsM"/>
+                                            <constraint firstAttribute="trailing" secondItem="sOa-AE-tny" secondAttribute="trailing" constant="2" id="RTl-Zy-AxL"/>
+                                            <constraint firstItem="c96-by-P9e" firstAttribute="top" secondItem="40R-w1-dxQ" secondAttribute="top" constant="8" id="Res-AH-8iM"/>
+                                            <constraint firstItem="c96-by-P9e" firstAttribute="centerX" secondItem="40R-w1-dxQ" secondAttribute="centerX" id="dFR-6L-516"/>
+                                            <constraint firstAttribute="bottom" secondItem="sOa-AE-tny" secondAttribute="bottom" constant="12" id="stM-EN-eXQ"/>
+                                            <constraint firstAttribute="height" constant="100" id="uNa-T9-rmc"/>
+                                            <constraint firstItem="sOa-AE-tny" firstAttribute="leading" secondItem="40R-w1-dxQ" secondAttribute="leading" constant="2" id="uRo-sM-YxW"/>
+                                        </constraints>
+                                    </customView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="sOa-AE-tny" firstAttribute="centerX" secondItem="yCb-n0-BMK" secondAttribute="centerX" id="xbV-4c-RaT"/>
-                                    <constraint firstItem="sOa-AE-tny" firstAttribute="centerY" secondItem="yCb-n0-BMK" secondAttribute="centerY" id="xuO-F1-GEG"/>
+                                    <constraint firstItem="40R-w1-dxQ" firstAttribute="centerX" secondItem="yCb-n0-BMK" secondAttribute="centerX" id="BnK-YG-HB3"/>
+                                    <constraint firstItem="40R-w1-dxQ" firstAttribute="centerY" secondItem="yCb-n0-BMK" secondAttribute="centerY" id="daC-kK-eVB"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="dropHereView" destination="40R-w1-dxQ" id="WJn-re-EWJ"/>
                                     <outlet property="label" destination="sOa-AE-tny" id="xYf-ly-olG"/>
                                 </connections>
                             </customView>
@@ -776,4 +804,10 @@
             <point key="canvasLocation" x="75" y="655"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="arrow.down.doc" width="106" height="136"/>
+        <namedColor name="lottie-contrast">
+            <color red="0.0" green="0.47843137254901963" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
