@@ -18,18 +18,18 @@ final class PlayerViewModel {
     @Published var windowTitle: String = "LottiePlayer"
     @Published var progress: Float = 0
 
-    let toggleAnimation = PassthroughSubject<Void, Never>()
-    let changeAnimation = PassthroughSubject<URL, Never>()
-    let changeProgress = PassthroughSubject<ProgressRange, Never>()
+    let onSpaceKeyDown = PassthroughSubject<Void, Never>()
+    let onAnimationURLChanged = PassthroughSubject<URL, Never>()
+    let onProgressChanged = PassthroughSubject<ProgressRange, Never>()
 
     var fileURL: URL? {
         didSet {
             if let url = fileURL {
                 windowTitle = url.lastPathComponent
-                changeAnimation.send(url)
+                onAnimationURLChanged.send(url)
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.changeProgress.send(ProgressRange(from: 0, to: 1))
+                    self.onProgressChanged.send(ProgressRange(from: 0, to: 1))
                 }
             }
         }
@@ -50,7 +50,7 @@ final class PlayerViewModel {
             progress = option ? 1 : progress
 
         case KeyCode.space.rawValue:
-            toggleAnimation.send(Void())
+            onSpaceKeyDown.send(Void())
             return
 
         default:
@@ -58,6 +58,6 @@ final class PlayerViewModel {
         }
 
         self.progress = Float(progress)
-        changeProgress.send(ProgressRange(from: progress, to: progress))
+        onProgressChanged.send(ProgressRange(from: progress, to: progress))
     }
 }

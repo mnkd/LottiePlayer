@@ -14,7 +14,7 @@ class PlayerView: NSView {
 
     var currentProgress: AnimationProgressTime? { animationView?.realtimeAnimationProgress }
     private var animationView: AnimationView?
-    private var subscriptions = Set<AnyCancellable>()
+    private var cancellable = Set<AnyCancellable>()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,7 +27,7 @@ class PlayerView: NSView {
                 let rect = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
                 self.animationView?.frame = rect
             }
-            .store(in: &subscriptions)
+            .store(in: &cancellable)
     }
 
     func setUpAnimation(filePath: String) {

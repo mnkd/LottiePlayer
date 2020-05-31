@@ -11,7 +11,7 @@ import Combine
 import os.log
 
 final class DraggingDestinationView: NSView {
-    let droppedFileURL = PassthroughSubject<URL, Never>()
+    let onFileURLDropped = PassthroughSubject<URL, Never>()
 
     var isLabelHidden: Bool = false {
         didSet {
@@ -75,7 +75,7 @@ final class DraggingDestinationView: NSView {
 
         os_log(logType, log: log, "url: %@", url.absoluteString)
         dropHereView.isHidden = true
-        droppedFileURL.send(url)
+        onFileURLDropped.send(url)
         return true
     }
 

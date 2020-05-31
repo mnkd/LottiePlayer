@@ -15,7 +15,7 @@ class PlayerViewController: NSViewController {
     @IBOutlet private weak var draggingDestinationView: DraggingDestinationView!
     @IBOutlet private weak var slider: NSSlider!
 
-    private var subscriptions = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()
     private let viewModel = PlayerViewModel()
 
     override var representedObject: Any? {
@@ -30,34 +30,34 @@ class PlayerViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        draggingDestinationView.droppedFileURL
-            .store(in: &subscriptions)
+        draggingDestinationView.onFileURLDropped
             .sink { [weak self] in self?.viewModel.fileURL = $0 }
+            .store(in: &cancellables)
 
-        viewModel.changeAnimation
-            .store(in: &subscriptions)
+        viewModel.onAnimationURLChanged
             .sink { [weak self] in self?.playerView.setUpAnimation(filePath: $0.path) }
+            .store(in: &cancellables)
 
-        viewModel.changeProgress
-            .store(in: &subscriptions)
+        viewModel.onProgressChanged
             .sink { [weak self] in self?.playerView.play(fromProgress: $0.from, toProgress: $0.to) }
+            .store(in: &cancellables)
 
-        viewModel.toggleAnimation
-            .store(in: &subscriptions)
+        viewModel.onSpaceKeyDown
             .sink { [weak self] in self?.playerView.playOrPause() }
+            .store(in: &cancellables)
 
         viewModel.$progress
             .receive(on: DispatchQueue.main)
             .assign(to: \.floatValue, on: slider)
-            .store(in: &subscriptions)
+            .store(in: &cancellables)
 
-        Timer.publish(every: 0.01, on: RunLoop.main, in: .common)
+        Timer.publish(every: 0.01, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
                 guard let progress = self?.playerView.currentProgress else { return }
                 self?.slider.floatValue = Float(progress)
             }
-            .store(in: &subscriptions)
+            .store(in: &cancellables)
     }
 
     override func viewDidAppear() {
@@ -69,15 +69,15 @@ class PlayerViewController: NSViewController {
                     guard let self = self else { return ($0, 0) }
                     return ($0, self.slider.floatValue)
                 }
-                .store(in: &subscriptions)
                 .sink { [weak self] (event, progress) in
                     self?.viewModel.keyDown(event, currentProgress: progress)
                 }
+                .store(in: &cancellables)
 
             viewModel.$windowTitle
                 .receive(on: DispatchQueue.main)
                 .assign(to: \.title, on: window)
-                .store(in: &subscriptions)
+                .store(in: &cancellables)
         }
     }
 
