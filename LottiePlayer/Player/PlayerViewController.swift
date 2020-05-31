@@ -31,20 +31,20 @@ class PlayerViewController: NSViewController {
         super.viewDidLoad()
 
         draggingDestinationView.droppedFileURL
-            .sink { self.viewModel.fileURL = $0 }
             .store(in: &subscriptions)
+            .sink { [weak self] in self?.viewModel.fileURL = $0 }
 
         viewModel.changeAnimation
-            .sink { self.playerView.setUpAnimation(filePath: $0.path) }
             .store(in: &subscriptions)
+            .sink { [weak self] in self?.playerView.setUpAnimation(filePath: $0.path) }
 
         viewModel.changeProgress
-            .sink { self.playerView.play(fromProgress: $0.from, toProgress: $0.to) }
             .store(in: &subscriptions)
+            .sink { [weak self] in self?.playerView.play(fromProgress: $0.from, toProgress: $0.to) }
 
         viewModel.toggleAnimation
-            .sink { self.playerView.playOrPause() }
             .store(in: &subscriptions)
+            .sink { [weak self] in self?.playerView.playOrPause() }
 
         viewModel.$progress
             .receive(on: DispatchQueue.main)
@@ -53,9 +53,9 @@ class PlayerViewController: NSViewController {
 
         Timer.publish(every: 0.01, on: RunLoop.main, in: .common)
             .autoconnect()
-            .sink { _ in
-                guard let progress = self.playerView.currentProgress else { return }
-                self.slider.floatValue = Float(progress)
+            .sink { [weak self] _ in
+                guard let progress = self?.playerView.currentProgress else { return }
+                self?.slider.floatValue = Float(progress)
             }
             .store(in: &subscriptions)
     }
@@ -65,11 +65,14 @@ class PlayerViewController: NSViewController {
 
         if let window = view.window as? PlayerWindow {
             window.keyDownEvent
-                .map { ($0, self.slider.floatValue) }
-                .sink { (event, progress) in
-                    self.viewModel.keyDown(event, currentProgress: progress)
+                .map { [weak self] in
+                    guard let self = self else { return ($0, 0) }
+                    return ($0, self.slider.floatValue)
                 }
                 .store(in: &subscriptions)
+                .sink { [weak self] (event, progress) in
+                    self?.viewModel.keyDown(event, currentProgress: progress)
+                }
 
             viewModel.$windowTitle
                 .receive(on: DispatchQueue.main)

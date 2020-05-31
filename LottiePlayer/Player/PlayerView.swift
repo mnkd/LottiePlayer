@@ -22,7 +22,8 @@ class PlayerView: NSView {
         NotificationCenter.default
             .publisher(for: NSWindow.didResizeNotification)
             .subscribe(on: DispatchQueue.main)
-            .sink { _ in
+            .sink { [weak self ] _ in
+                guard let self = self else { return }
                 let rect = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
                 self.animationView?.frame = rect
             }
