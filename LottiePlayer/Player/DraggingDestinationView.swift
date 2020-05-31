@@ -13,13 +13,21 @@ import os.log
 final class DraggingDestinationView: NSView {
     let droppedFileURL = PassthroughSubject<URL, Never>()
 
-    private var isDragging: Bool = false
     var isLabelHidden: Bool = false {
         didSet {
             label.isHidden = isLabelHidden
         }
     }
+
+    private var isDragging: Bool = false {
+        didSet {
+            needsDisplay = true
+        }
+    }
+
     private let log = OSLog(subsystem: Bundle.main.bundleIdentifier!, category: "Dragging")
+    private let logType: OSLogType = .debug
+
     @IBOutlet private weak var label: NSTextField!
 
     override func awakeFromNib() {
@@ -39,49 +47,41 @@ final class DraggingDestinationView: NSView {
         path.stroke()
     }
 
-    func shouldAllowDrag(_ draggingInfo: NSDraggingInfo) -> Bool {
+    private func shouldAllowDrop(_ draggingInfo: NSDraggingInfo) -> Bool {
         retrieveJSONFileURL(draggingInfo) != nil
     }
 
     // MARK: - NSDraggingDestination
 
     override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-        os_log(.default, log: log, "%@", #function)
+        os_log(logType, log: log, "%@", #function)
+        guard shouldAllowDrop(sender) else { return [] }
 
-        guard shouldAllowDrag(sender) else { return [] }
-
-        // Show highlight
         isDragging = true
-        needsDisplay = true
         return [.generic]
     }
 
     override func draggingExited(_ sender: NSDraggingInfo?) {
-        os_log(.default, log: log, "%@", #function)
-
+        os_log(logType, log: log, "%@", #function)
         isDragging = false
-        needsDisplay = true
     }
 
     override func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
-        os_log(.default, log: log, "%@", #function)
-
+        os_log(logType, log: log, "%@", #function)
         isDragging = false
-        needsDisplay = true
 
         guard let url = retrieveJSONFileURL(sender) else {
             return false
         }
 
-        // Do something
-        os_log(.default, log: log, "url: %@", url.absoluteString)
+        os_log(logType, log: log, "url: %@", url.absoluteString)
         label.isHidden = true
         droppedFileURL.send(url)
         return true
     }
 
     override func concludeDragOperation(_ sender: NSDraggingInfo?) {
-        os_log(.default, log: log, "%@", #function)
+        os_log(logType, log: log, "%@", #function)
         // Not working?
     }
 
