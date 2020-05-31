@@ -15,85 +15,65 @@ class PlayerViewController: NSViewController {
     @IBOutlet private weak var draggingDestinationView: DraggingDestinationView!
     @IBOutlet private weak var slider: NSSlider!
 
-    private class Subscriptions {
-        var draggedFileURL: AnyCancellable?
-        var keyDownEvent: AnyCancellable?
-        var windowTitle: AnyCancellable?
-
-        var toggleAnimation: AnyCancellable?
-        var changeAnimation: AnyCancellable?
-        var changeProgress: AnyCancellable?
-
-        var timer: AnyCancellable?
-        var progress: AnyCancellable?
-    }
-
-    private let subscriptions = Subscriptions()
+    private var subscriptions = Set<AnyCancellable>()
     private let viewModel = PlayerViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        subscriptions.draggedFileURL = draggingDestinationView.draggedFileURL
-            .sink { url in
-                self.viewModel.fileURL = url
-            }
+        draggingDestinationView.droppedFileURL
+            .sink { self.viewModel.fileURL = $0 }
+            .store(in: &subscriptions)
 
-        subscriptions.changeAnimation = viewModel.changeAnimation
+        viewModel.changeAnimation
             .sink { url in
                 self.playerView.setUpAnimation(filePath: url.path)
                 self.playerView.play()
             }
+            .store(in: &subscriptions)
 
-        subscriptions.changeProgress = viewModel.changeProgress
-            .sink { range in
-                self.playerView.play(fromProgress: range.from, toProgress: range.to)
-            }
+        viewModel.changeProgress
+            .sink { self.playerView.play(fromProgress: $0.from, toProgress: $0.to) }
+            .store(in: &subscriptions)
 
-        subscriptions.toggleAnimation = viewModel.toggleAnimation
-            .sink {
-                self.playerView.playOrPause()
-            }
+        viewModel.toggleAnimation
+            .sink { self.playerView.playOrPause() }
+            .store(in: &subscriptions)
 
-        subscriptions.progress = viewModel.$progress
+        viewModel.$progress
             .receive(on: DispatchQueue.main)
             .assign(to: \.floatValue, on: slider)
+            .store(in: &subscriptions)
 
-        setUpTimer()
+        Timer.publish(every: 0.01, on: RunLoop.main, in: .common)
+            .autoconnect()
+            .sink { _ in
+                guard let progress = self.playerView.currentProgress else { return }
+                self.slider.floatValue = Float(progress)
+            }
+            .store(in: &subscriptions)
     }
 
     override func viewDidAppear() {
         super.viewDidAppear()
 
         if let window = view.window as? PlayerWindow {
-
-            subscriptions.keyDownEvent = window.keyDownEvent
+            window.keyDownEvent
                 .map { ($0, self.slider.floatValue) }
                 .sink { (event, progress) in
                     self.viewModel.keyDown(event, currentProgress: progress)
                 }
+                .store(in: &subscriptions)
 
-            subscriptions.windowTitle = viewModel.$windowTitle
+            viewModel.$windowTitle
                 .receive(on: DispatchQueue.main)
                 .assign(to: \.title, on: window)
+                .store(in: &subscriptions)
         }
     }
 
     @IBAction func sliderAction(_ sender: NSSlider) {
         let progress = CGFloat(sender.floatValue)
         playerView.play(fromProgress: progress, toProgress: progress)
-    }
-
-    // MARK: - Private
-
-    private func setUpTimer() {
-        guard subscriptions.timer == nil else { return }
-        let publisher = Timer.publish(every: 0.01, on: RunLoop.main, in: .common)
-            .autoconnect()
-
-        subscriptions.timer = publisher.sink { [weak self] _ in
-            guard let progress = self?.playerView.currentProgress else { return }
-            self?.slider.floatValue = Float(progress)
-        }
     }
 }

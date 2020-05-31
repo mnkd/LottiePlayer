@@ -48,6 +48,7 @@ final class PlayerViewModel {
         case KeyCode.space.rawValue:
             toggleAnimation.send(Void())
             return
+
         default:
             break
         }

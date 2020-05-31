@@ -7,23 +7,26 @@
 //
 
 import Cocoa
+import Combine
 import Lottie
 
 class PlayerView: NSView {
 
     var currentProgress: AnimationProgressTime? { animationView?.realtimeAnimationProgress }
     private var animationView: AnimationView?
+    private var subscriptions = Set<AnyCancellable>()
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        NotificationCenter.default.addObserver(
-            forName: NSWindow.didResizeNotification,
-            object: nil,
-            queue: OperationQueue.main) { [weak self] notif in
-                guard let self = self else { return }
-                self.animationView?.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+        NotificationCenter.default
+            .publisher(for: NSWindow.didResizeNotification)
+            .subscribe(on: DispatchQueue.main)
+            .sink { _ in
+                let rect = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+                self.animationView?.frame = rect
             }
+            .store(in: &subscriptions)
     }
 
     func setUpAnimation(filePath: String) {

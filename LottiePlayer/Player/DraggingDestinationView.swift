@@ -11,7 +11,7 @@ import Combine
 import os.log
 
 final class DraggingDestinationView: NSView {
-    let draggedFileURL = PassthroughSubject<URL, Never>()
+    let droppedFileURL = PassthroughSubject<URL, Never>()
 
     private var isDragging: Bool = false
     private let log = OSLog(subsystem: Bundle.main.bundleIdentifier!, category: "Dragging")
@@ -71,7 +71,7 @@ final class DraggingDestinationView: NSView {
         // Do something
         os_log(.default, log: log, "url: %@", url.absoluteString)
         label.isHidden = true
-        draggedFileURL.send(url)
+        droppedFileURL.send(url)
         return true
     }
 
