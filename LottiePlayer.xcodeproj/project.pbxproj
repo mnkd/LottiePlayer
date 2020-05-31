@@ -12,8 +12,6 @@
 		4D0CAC602481A48A00DC2BFC /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0CAC5F2481A48A00DC2BFC /* PlayerViewController.swift */; };
 		4D0CAC622481A48B00DC2BFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D0CAC612481A48B00DC2BFC /* Assets.xcassets */; };
 		4D0CAC652481A48B00DC2BFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D0CAC632481A48B00DC2BFC /* Main.storyboard */; };
-		4D0CAC712481A48C00DC2BFC /* LottiePlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0CAC702481A48C00DC2BFC /* LottiePlayerTests.swift */; };
-		4D0CAC7C2481A48C00DC2BFC /* LottiePlayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0CAC7B2481A48C00DC2BFC /* LottiePlayerUITests.swift */; };
 		4D14B42D2481A7D900A3F8D4 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D14B42C2481A7D900A3F8D4 /* PlayerView.swift */; };
 		4D14B4312481AAAD00A3F8D4 /* DraggingDestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D14B4302481AAAD00A3F8D4 /* DraggingDestinationView.swift */; };
 		4D14B43724822C8D00A3F8D4 /* PlayerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D14B43624822C8D00A3F8D4 /* PlayerWindow.swift */; };
@@ -56,11 +54,7 @@
 		4D0CAC662481A48B00DC2BFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D0CAC672481A48B00DC2BFC /* LottiePlayer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LottiePlayer.entitlements; sourceTree = "<group>"; };
 		4D0CAC6C2481A48C00DC2BFC /* LottiePlayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LottiePlayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D0CAC702481A48C00DC2BFC /* LottiePlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottiePlayerTests.swift; sourceTree = "<group>"; };
-		4D0CAC722481A48C00DC2BFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D0CAC772481A48C00DC2BFC /* LottiePlayerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LottiePlayerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D0CAC7B2481A48C00DC2BFC /* LottiePlayerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottiePlayerUITests.swift; sourceTree = "<group>"; };
-		4D0CAC7D2481A48C00DC2BFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D14B42C2481A7D900A3F8D4 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		4D14B4302481AAAD00A3F8D4 /* DraggingDestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggingDestinationView.swift; sourceTree = "<group>"; };
 		4D14B43624822C8D00A3F8D4 /* PlayerWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerWindow.swift; sourceTree = "<group>"; };
@@ -106,8 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				4D0CAC5C2481A48A00DC2BFC /* LottiePlayer */,
-				4D0CAC6F2481A48C00DC2BFC /* LottiePlayerests */,
-				4D0CAC7A2481A48C00DC2BFC /* LottiePlayerUITests */,
 				4D0CAC5B2481A48A00DC2BFC /* Products */,
 				91E18802A8E4E1D0A6CA3B28 /* Pods */,
 				70A295ECD8C423F2C1193BEB /* Frameworks */,
@@ -135,24 +127,6 @@
 				4D14B43A24824BF100A3F8D4 /* Player */,
 			);
 			path = LottiePlayer;
-			sourceTree = "<group>";
-		};
-		4D0CAC6F2481A48C00DC2BFC /* LottiePlayerests */ = {
-			isa = PBXGroup;
-			children = (
-				4D0CAC702481A48C00DC2BFC /* LottiePlayerTests.swift */,
-				4D0CAC722481A48C00DC2BFC /* Info.plist */,
-			);
-			path = LottiePlayerests;
-			sourceTree = "<group>";
-		};
-		4D0CAC7A2481A48C00DC2BFC /* LottiePlayerUITests */ = {
-			isa = PBXGroup;
-			children = (
-				4D0CAC7B2481A48C00DC2BFC /* LottiePlayerUITests.swift */,
-				4D0CAC7D2481A48C00DC2BFC /* Info.plist */,
-			);
-			path = LottiePlayerUITests;
 			sourceTree = "<group>";
 		};
 		4D14B43A24824BF100A3F8D4 /* Player */ = {
@@ -447,7 +421,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D0CAC712481A48C00DC2BFC /* LottiePlayerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,7 +428,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D0CAC7C2481A48C00DC2BFC /* LottiePlayerUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
