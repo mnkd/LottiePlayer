@@ -65,23 +65,20 @@ final class DraggingDestinationView: NSView {
         isDragging = false
     }
 
-    override func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
+    override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
         os_log(logType, log: log, "%@", #function)
-        isDragging = false
-
         guard let url = retrieveJSONFileURL(sender) else {
             return false
         }
 
-        os_log(logType, log: log, "url: %@", url.absoluteString)
         dropHereView.isHidden = true
         onFileURLDropped.send(url)
+
         return true
     }
 
     override func concludeDragOperation(_ sender: NSDraggingInfo?) {
-        os_log(logType, log: log, "%@", #function)
-        // Not working?
+        isDragging = false
     }
 
     // MARK: - private
