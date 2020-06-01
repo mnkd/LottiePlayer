@@ -92,3 +92,8 @@ iOSInjectionProject/
 # Bundler
 .bundle/
 vendor/
+
+
+# App Bundle
+LottiePlayer.zip
+
