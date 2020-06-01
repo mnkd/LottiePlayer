@@ -35,7 +35,16 @@ final class PlayerViewModel {
         }
     }
 
-    func keyDown(_ event: NSEvent, currentProgress: Float) {
+    func canHandleKeyEvent(_ event: NSEvent) -> Bool {
+        switch event.keyCode {
+        case KeyCode.leftArrow.rawValue, KeyCode.rightArrow.rawValue, KeyCode.space.rawValue:
+            return true
+        default:
+            return false
+        }
+    }
+
+    func performKeyEvent(_ event: NSEvent, currentProgress: Float) {
         var progress = CGFloat(currentProgress)
         let option = event.modifierFlags.contains(.command)
         let command: CGFloat = event.modifierFlags.contains(.option) ? 20 : 1

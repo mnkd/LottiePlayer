@@ -58,22 +58,21 @@ class PlayerViewController: NSViewController {
                 self?.slider.floatValue = Float(progress)
             }
             .store(in: &cancellables)
+
+        NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event -> NSEvent? in
+            guard let self = self else { return nil }
+            // Prevent beep
+            guard self.viewModel.canHandleKeyEvent(event) else { return event }
+
+            self.viewModel.performKeyEvent(event, currentProgress: self.slider.floatValue)
+            return nil
+        }
     }
 
     override func viewDidAppear() {
         super.viewDidAppear()
 
         if let window = view.window as? PlayerWindow {
-            window.keyDownEvent
-                .map { [weak self] in
-                    guard let self = self else { return ($0, 0) }
-                    return ($0, self.slider.floatValue)
-                }
-                .sink { [weak self] (event, progress) in
-                    self?.viewModel.keyDown(event, currentProgress: progress)
-                }
-                .store(in: &cancellables)
-
             viewModel.$windowTitle
                 .receive(on: DispatchQueue.main)
                 .assign(to: \.title, on: window)

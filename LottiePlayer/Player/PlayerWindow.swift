@@ -10,15 +10,8 @@ import Cocoa
 import Combine
 
 class PlayerWindow: NSWindow {
-    let keyDownEvent = PassthroughSubject<NSEvent, Never>()
-
     override func awakeFromNib() {
         super.awakeFromNib()
         title = "LottiePlayer"
-    }
-
-    override func keyDown(with event: NSEvent) {
-        super.keyDown(with: event)
-        keyDownEvent.send(event)
     }
 }
