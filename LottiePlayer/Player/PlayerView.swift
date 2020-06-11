@@ -11,8 +11,8 @@ import Combine
 import Lottie
 
 class PlayerView: NSView {
+    var currentFrame: AnimationFrameTime? { animationView?.realtimeAnimationFrame }
 
-    var currentProgress: AnimationProgressTime? { animationView?.realtimeAnimationProgress }
     private var animationView: AnimationView?
     private var cancellable = Set<AnyCancellable>()
 
@@ -30,10 +30,10 @@ class PlayerView: NSView {
             .store(in: &cancellable)
     }
 
-    func setUpAnimation(filePath: String) {
+    func setUpAnimation(_ animation: Animation) {
         animationView?.removeFromSuperview()
 
-        let newView = Lottie.AnimationView(filePath: filePath)
+        let newView = AnimationView(animation: animation)
         newView.loopMode = .playOnce
         newView.contentMode = .scaleAspectFit
         newView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
@@ -41,25 +41,20 @@ class PlayerView: NSView {
         animationView = newView
     }
 
-    func play() {
-        animationView?.play()
-    }
-
     func playOrPause() {
-        let isAnimationPlaying = animationView?.isAnimationPlaying ?? false
-        if  isAnimationPlaying {
-            animationView?.pause()
+        guard
+            let animationView = animationView,
+            let animation = animationView.animation else { return }
+
+        if  animationView.isAnimationPlaying {
+            animationView.pause()
         } else {
-            animationView?.play(fromProgress: nil, toProgress: 1)
+            animationView.play(fromFrame: nil, toFrame: animation.endFrame)
         }
     }
 
-    func play(fromProgress: AnimationProgressTime?, toProgress: AnimationProgressTime) {
-        animationView?.play(
-            fromProgress: fromProgress,
-            toProgress: toProgress,
-            loopMode: .playOnce,
-            completion: nil)
+    func play(fromFrame: AnimationFrameTime?, toFrame: AnimationFrameTime) {
+        animationView?.play(fromFrame: fromFrame, toFrame: toFrame, loopMode: .playOnce, completion: nil)
     }
 
     func stop() {

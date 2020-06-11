@@ -8,28 +8,38 @@
 
 import Cocoa
 import Combine
+import Lottie
 
-struct ProgressRange {
-    let from: CGFloat
-    let to: CGFloat
+struct FrameTimeRange {
+    let from: AnimationFrameTime
+    let to: AnimationFrameTime
 }
 
 final class PlayerViewModel {
     @Published var windowTitle: String = "LottiePlayer"
-    @Published var progress: Float = 0
+    @Published var currentFrameTime: AnimationFrameTime = 0
 
     let onSpaceKeyDown = PassthroughSubject<Void, Never>()
-    let onAnimationURLChanged = PassthroughSubject<URL, Never>()
-    let onProgressChanged = PassthroughSubject<ProgressRange, Never>()
+    let onAnimationChanged = PassthroughSubject<Animation, Never>()
+    let onAnimationEndFrameChanged = PassthroughSubject<AnimationFrameTime, Never>()
+    let onFrameTimeChanged = PassthroughSubject<FrameTimeRange, Never>()
+    private var animation: Animation?
 
     var fileURL: URL? {
         didSet {
             if let url = fileURL {
                 windowTitle = url.lastPathComponent
-                onAnimationURLChanged.send(url)
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.onProgressChanged.send(ProgressRange(from: 0, to: 1))
+                if let animation = Animation.filepath(url.path) {
+                    self.animation = animation
+                    onAnimationChanged.send(animation)
+                    onAnimationEndFrameChanged.send(animation.endFrame)
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.onFrameTimeChanged.send(FrameTimeRange(from: 0, to: animation.endFrame))
+                    }
+                } else {
+                    fatalError("Could not create an Animation with \(url.path)")
                 }
             }
         }
@@ -44,19 +54,21 @@ final class PlayerViewModel {
         }
     }
 
-    func performKeyEvent(_ event: NSEvent, currentProgress: Float) {
-        var progress = CGFloat(currentProgress)
+    func performKeyEvent(_ event: NSEvent, currentFrameTime: AnimationFrameTime) {
+        guard let animation = animation else { return }
+
+        var frameTime = currentFrameTime
         let option = event.modifierFlags.contains(.command)
-        let command: CGFloat = event.modifierFlags.contains(.option) ? 20 : 1
+        let command: AnimationFrameTime = event.modifierFlags.contains(.option) ? 10 : 1
 
         switch event.keyCode {
         case KeyCode.leftArrow.rawValue:
-            progress -= (0.001 * command)
-            progress = option ? 0 : progress
+            frameTime -= command
+            frameTime = option ? animation.startFrame : frameTime
 
         case KeyCode.rightArrow.rawValue:
-            progress += (0.001 * command)
-            progress = option ? 1 : progress
+            frameTime += command
+            frameTime = option ? animation.endFrame : frameTime
 
         case KeyCode.space.rawValue:
             onSpaceKeyDown.send(Void())
@@ -66,7 +78,6 @@ final class PlayerViewModel {
             break
         }
 
-        self.progress = Float(progress)
-        onProgressChanged.send(ProgressRange(from: progress, to: progress))
+        onFrameTimeChanged.send(FrameTimeRange(from: frameTime, to: frameTime))
     }
 }

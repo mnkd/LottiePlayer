@@ -764,17 +764,31 @@
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="32"/>
                                 <subviews>
                                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="erj-1Q-mIY">
-                                        <rect key="frame" x="18" y="7" width="444" height="19"/>
+                                        <rect key="frame" x="58" y="7" width="404" height="19"/>
                                         <sliderCell key="cell" continuous="YES" alignment="left" maxValue="1" tickMarkPosition="above" sliderType="linear" id="DFc-KR-uth"/>
                                         <connections>
                                             <action selector="sliderAction:" target="XfG-lQ-9wD" id="GYg-OZ-gMG"/>
                                         </connections>
                                     </slider>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="edZ-nA-O3k">
+                                        <rect key="frame" x="18" y="8" width="36" height="16"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="16" id="bqX-Na-mRm"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="9999" id="pCe-9x-m7l">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="erj-1Q-mIY" firstAttribute="leading" secondItem="3u7-kd-r5Z" secondAttribute="leading" constant="20" id="NOJ-ig-JV0"/>
+                                    <constraint firstItem="erj-1Q-mIY" firstAttribute="leading" secondItem="3u7-kd-r5Z" secondAttribute="leading" constant="60" id="NOJ-ig-JV0"/>
+                                    <constraint firstItem="erj-1Q-mIY" firstAttribute="leading" secondItem="edZ-nA-O3k" secondAttribute="trailing" constant="8" id="Rzc-nN-hjD"/>
                                     <constraint firstItem="erj-1Q-mIY" firstAttribute="centerY" secondItem="3u7-kd-r5Z" secondAttribute="centerY" id="VZW-04-dol"/>
                                     <constraint firstAttribute="trailing" secondItem="erj-1Q-mIY" secondAttribute="trailing" constant="20" id="btS-dI-4Og"/>
+                                    <constraint firstItem="edZ-nA-O3k" firstAttribute="leading" secondItem="3u7-kd-r5Z" secondAttribute="leading" constant="20" id="qjT-GK-5Co"/>
+                                    <constraint firstItem="edZ-nA-O3k" firstAttribute="centerY" secondItem="3u7-kd-r5Z" secondAttribute="centerY" id="xQ1-Xw-LJp"/>
                                 </constraints>
                             </customView>
                         </subviews>
@@ -795,11 +809,13 @@
                     </view>
                     <connections>
                         <outlet property="draggingDestinationView" destination="yCb-n0-BMK" id="bsE-9C-Tti"/>
+                        <outlet property="frameLabel" destination="edZ-nA-O3k" id="S8m-o6-A8U"/>
                         <outlet property="playerView" destination="ucJ-aw-8u5" id="HIZ-yx-46q"/>
                         <outlet property="slider" destination="erj-1Q-mIY" id="WXP-gJ-LOR"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="jHh-tS-K1z"/>
             </objects>
             <point key="canvasLocation" x="75" y="655"/>
         </scene>
