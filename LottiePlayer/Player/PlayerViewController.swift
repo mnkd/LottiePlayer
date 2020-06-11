@@ -14,6 +14,7 @@ class PlayerViewController: NSViewController {
     @IBOutlet private weak var playerView: PlayerView!
     @IBOutlet private weak var draggingDestinationView: DraggingDestinationView!
     @IBOutlet private weak var slider: NSSlider!
+    @IBOutlet private weak var frameLabel: NSTextField!
 
     private var cancellables = Set<AnyCancellable>()
     private let viewModel = PlayerViewModel()
@@ -34,28 +35,40 @@ class PlayerViewController: NSViewController {
             .sink { [weak self] in self?.viewModel.fileURL = $0 }
             .store(in: &cancellables)
 
-        viewModel.onAnimationURLChanged
-            .sink { [weak self] in self?.playerView.setUpAnimation(filePath: $0.path) }
+        viewModel.onAnimationChanged
+            .sink { [weak self] in self?.playerView.setUpAnimation($0) }
             .store(in: &cancellables)
 
-        viewModel.onProgressChanged
-            .sink { [weak self] in self?.playerView.play(fromProgress: $0.from, toProgress: $0.to) }
+        viewModel.onAnimationEndFrameChanged
+            .map { Double($0) }
+            .assign(to: \.maxValue, on: slider)
+            .store(in: &cancellables)
+
+        viewModel.onFrameTimeChanged
+            .sink { [weak self] in self?.playerView.play(fromFrame: $0.from, toFrame: $0.to) }
             .store(in: &cancellables)
 
         viewModel.onSpaceKeyDown
             .sink { [weak self] in self?.playerView.playOrPause() }
             .store(in: &cancellables)
 
-        viewModel.$progress
+        viewModel.$currentFrameTime
             .receive(on: DispatchQueue.main)
-            .assign(to: \.floatValue, on: slider)
+            .map { Int($0) }
+            .assign(to: \.integerValue, on: slider)
+            .store(in: &cancellables)
+
+        slider
+            .publisher(for: \.integerValue)
+            .map { String($0) }
+            .assign(to: \.stringValue , on: frameLabel)
             .store(in: &cancellables)
 
         Timer.publish(every: 0.01, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
-                guard let progress = self?.playerView.currentProgress else { return }
-                self?.slider.floatValue = Float(progress)
+                guard let frameTime = self?.playerView.currentFrame else { return }
+                self?.slider.integerValue = Int(frameTime)
             }
             .store(in: &cancellables)
 
@@ -64,7 +77,7 @@ class PlayerViewController: NSViewController {
             // Prevent beep
             guard self.viewModel.canHandleKeyEvent(event) else { return event }
 
-            self.viewModel.performKeyEvent(event, currentProgress: self.slider.floatValue)
+            self.viewModel.performKeyEvent(event, currentFrameTime: AnimationFrameTime(self.slider.integerValue))
             return nil
         }
     }
@@ -81,7 +94,7 @@ class PlayerViewController: NSViewController {
     }
 
     @IBAction func sliderAction(_ sender: NSSlider) {
-        let progress = CGFloat(sender.floatValue)
-        playerView.play(fromProgress: progress, toProgress: progress)
+        let frameTime = AnimationFrameTime(sender.integerValue)
+        playerView.play(fromFrame: frameTime, toFrame: frameTime)
     }
 }
