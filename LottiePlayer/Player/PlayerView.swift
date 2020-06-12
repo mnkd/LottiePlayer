@@ -14,7 +14,7 @@ class PlayerView: NSView {
     var currentFrame: AnimationFrameTime? { animationView?.realtimeAnimationFrame }
 
     private var animationView: AnimationView?
-    private var cancellable = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,7 +27,7 @@ class PlayerView: NSView {
                 let rect = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
                 self.animationView?.frame = rect
             }
-            .store(in: &cancellable)
+            .store(in: &cancellables)
     }
 
     func setUpAnimation(_ animation: Animation) {
@@ -44,7 +44,8 @@ class PlayerView: NSView {
     func playOrPause() {
         guard
             let animationView = animationView,
-            let animation = animationView.animation else { return }
+            let animation = animationView.animation
+        else { return }
 
         if  animationView.isAnimationPlaying {
             animationView.pause()
