@@ -47,8 +47,7 @@ class PlayerViewController: NSViewController {
             .store(in: &cancellables)
 
         viewModel.onAnimationEndFrameChanged
-            .map { Double($0) }
-            .assign(to: \.maxValue, on: slider)
+            .sink { [weak self] in self?.slider.maxValue = Double($0) }
             .store(in: &cancellables)
 
         viewModel.onFrameTimeChanged
@@ -61,14 +60,12 @@ class PlayerViewController: NSViewController {
 
         viewModel.$currentFrameTime
             .receive(on: DispatchQueue.main)
-            .map { Int($0) }
-            .assign(to: \.integerValue, on: slider)
+            .sink { [weak self] in self?.slider.integerValue = Int($0) }
             .store(in: &cancellables)
 
         slider
             .publisher(for: \.integerValue)
-            .map { String($0) }
-            .assign(to: \.stringValue , on: frameLabel)
+            .sink { [weak self] in self?.frameLabel.stringValue = String($0) }
             .store(in: &cancellables)
 
         Timer.publish(every: 0.01, on: .main, in: .common)
@@ -85,12 +82,10 @@ class PlayerViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
 
-        if let window = view.window {
-            viewModel.$windowTitle
-                .receive(on: DispatchQueue.main)
-                .assign(to: \.title, on: window)
-                .store(in: &cancellables)
-        }
+        viewModel.$windowTitle
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in self?.view.window?.title = $0 }
+            .store(in: &cancellables)
     }
 
     @IBAction func sliderAction(_ sender: NSSlider) {
