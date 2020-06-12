@@ -73,7 +73,7 @@ xcodebuild \
   INSTALL_PATH="${INSTALL_PATH}" clean | bundle exec xcpretty
 
 # Workaround:
-# fatal error: file '/tmp/LottiePlayer.dst/usr/local/include/MCSAuthParameter.h' has been modified since the precompiled
+# fatal error: file '/tmp/LottiePlayer.dst/usr/local/include/XXXX.h' has been modified since the precompiled
 # header '/path/to/PrecompiledHeaders/LottiePlayer-Bridging-Header-swift_xxxx.pch' was built
 echo "rm -rf ${DERIVED_DATA_PATH}/Build/Intermediates.noindex/ArchiveIntermediates/${SCHEME}/PrecompiledHeaders"
 rm -rf "${DERIVED_DATA_PATH}/Build/Intermediates.noindex/ArchiveIntermediates/${SCHEME}/PrecompiledHeaders"
@@ -91,7 +91,7 @@ xcodebuild \
   DSTROOT="${DSTROOT}" \
   INSTALL_PATH="${INSTALL_PATH}" install | bundle exec xcpretty
 
-# Check if build succeeded
+# Check whether build succeeded
 if [ $? != 0 ]
 then
   exit 1
