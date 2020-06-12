@@ -25,9 +25,11 @@ final class DraggingDestinationView: NSView {
         }
     }
 
-    private let log = OSLog(subsystem: Bundle.main.bundleIdentifier!, category: "Dragging")
-    private let logType: OSLogType = .debug
     @IBOutlet private weak var dropHereView: NSView!
+
+    deinit {
+        unregisterDraggedTypes()
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,7 +55,6 @@ final class DraggingDestinationView: NSView {
     // MARK: - NSDraggingDestination
 
     override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-        os_log(logType, log: log, "%@", #function)
         guard shouldAllowDrop(sender) else { return [] }
 
         isDragging = true
@@ -61,12 +62,10 @@ final class DraggingDestinationView: NSView {
     }
 
     override func draggingExited(_ sender: NSDraggingInfo?) {
-        os_log(logType, log: log, "%@", #function)
         isDragging = false
     }
 
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-        os_log(logType, log: log, "%@", #function)
         guard let url = retrieveJSONFileURL(sender) else {
             return false
         }

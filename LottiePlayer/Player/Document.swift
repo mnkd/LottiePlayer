@@ -19,7 +19,7 @@ class Document: NSDocument {
         guard let windowController = storyboard.instantiateController(withIdentifier: id) as? NSWindowController else { return }
         addWindowController(windowController)
 
-        if let contentVC = windowController.contentViewController as? PlayerViewController {
+        if let contentVC = windowController.contentViewController {
             contentVC.representedObject = content
         }
     }

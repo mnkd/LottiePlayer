@@ -12,8 +12,4 @@ enum KeyCode: UInt16 {
     case leftArrow = 123
     case rightArrow = 124
     case space = 49
-    case h = 4
-    case j = 38
-    case k = 40
-    case l = 37
 }
