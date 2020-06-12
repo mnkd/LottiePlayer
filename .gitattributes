@@ -1,0 +1,10 @@
+# linguist
+# https://github.com/github/linguist#overrides
+
+Credits.rtf linguist-documentation
+
+Gemfile linguist-documentation
+Gemfile.lock linguist-generated
+
+Podfile linguist-documentation
+Podfile.lock linguist-generated
