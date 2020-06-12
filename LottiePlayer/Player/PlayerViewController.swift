@@ -18,6 +18,13 @@ class PlayerViewController: NSViewController {
 
     private var cancellables = Set<AnyCancellable>()
     private let viewModel = PlayerViewModel()
+    private var keyDownMonitor: Any?
+
+    deinit {
+        if let monitor = self.keyDownMonitor {
+            NSEvent.removeMonitor(monitor)
+        }
+    }
 
     override var representedObject: Any? {
         didSet {
@@ -72,14 +79,7 @@ class PlayerViewController: NSViewController {
             }
             .store(in: &cancellables)
 
-        NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event -> NSEvent? in
-            guard let self = self else { return nil }
-            // Prevent beep
-            guard self.viewModel.canHandleKeyEvent(event) else { return event }
-
-            self.viewModel.performKeyEvent(event, currentFrameTime: AnimationFrameTime(self.slider.integerValue))
-            return nil
-        }
+        startKeyEventMonitoring()
     }
 
     override func viewDidAppear() {
@@ -96,5 +96,16 @@ class PlayerViewController: NSViewController {
     @IBAction func sliderAction(_ sender: NSSlider) {
         let frameTime = AnimationFrameTime(sender.integerValue)
         playerView.play(fromFrame: frameTime, toFrame: frameTime)
+    }
+
+    private func startKeyEventMonitoring() {
+        keyDownMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event -> NSEvent? in
+            guard let self = self else { return nil }
+            guard let window = self.view.window, window.isKeyWindow else { return event }
+            guard KeyEvent(event).canHandle() else { return event }
+
+            self.viewModel.performKeyEvent(event, currentFrameTime: AnimationFrameTime(self.slider.integerValue))
+            return nil
+        }
     }
 }

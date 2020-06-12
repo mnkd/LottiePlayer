@@ -45,16 +45,8 @@ final class PlayerViewModel {
         }
     }
 
-    func canHandleKeyEvent(_ event: NSEvent) -> Bool {
-        switch event.keyCode {
-        case KeyCode.leftArrow.rawValue, KeyCode.rightArrow.rawValue, KeyCode.space.rawValue:
-            return true
-        default:
-            return false
-        }
-    }
-
     func performKeyEvent(_ event: NSEvent, currentFrameTime: AnimationFrameTime) {
+        guard KeyEvent(event).canHandle() else { return }
         guard let animation = animation else { return }
 
         var frameTime = currentFrameTime
