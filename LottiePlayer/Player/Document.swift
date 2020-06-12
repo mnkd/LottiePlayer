@@ -10,7 +10,6 @@ import Cocoa
 
 class Document: NSDocument {
     var content: Content?
-    var contentViewController: PlayerViewController?
 
     override func makeWindowControllers() {
         super.makeWindowControllers()
@@ -22,16 +21,10 @@ class Document: NSDocument {
 
         if let contentVC = windowController.contentViewController as? PlayerViewController {
             contentVC.representedObject = content
-            contentViewController = contentVC
         }
     }
 
     override func read(from url: URL, ofType typeName: String) throws {
         content = Content(url: url)
     }
-
-    override class var autosavesInPlace: Bool {
-        return false
-    }
-
 }

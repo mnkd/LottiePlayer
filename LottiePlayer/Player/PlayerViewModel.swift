@@ -35,8 +35,8 @@ final class PlayerViewModel {
                     onAnimationChanged.send(animation)
                     onAnimationEndFrameChanged.send(animation.endFrame)
 
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        self.onFrameTimeChanged.send(FrameTimeRange(from: 0, to: animation.endFrame))
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                        self?.onFrameTimeChanged.send(FrameTimeRange(from: 0, to: animation.endFrame))
                     }
                 } else {
                     fatalError("Could not create an Animation with \(url.path)")

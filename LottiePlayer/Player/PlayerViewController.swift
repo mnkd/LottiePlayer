@@ -85,7 +85,7 @@ class PlayerViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
 
-        if let window = view.window as? PlayerWindow {
+        if let window = view.window {
             viewModel.$windowTitle
                 .receive(on: DispatchQueue.main)
                 .assign(to: \.title, on: window)
