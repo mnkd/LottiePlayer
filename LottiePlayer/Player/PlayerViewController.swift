@@ -14,7 +14,8 @@ class PlayerViewController: NSViewController {
     @IBOutlet private weak var playerView: PlayerView!
     @IBOutlet private weak var draggingDestinationView: DraggingDestinationView!
     @IBOutlet private weak var slider: NSSlider!
-    @IBOutlet private weak var frameLabel: NSTextField!
+    @IBOutlet private weak var currentFrameLabel: NSTextField!
+    @IBOutlet private weak var endFrameLabel: NSTextField!
 
     private var cancellables = Set<AnyCancellable>()
     private let viewModel = PlayerViewModel()
@@ -47,7 +48,10 @@ class PlayerViewController: NSViewController {
             .store(in: &cancellables)
 
         viewModel.onAnimationEndFrameChanged
-            .sink { [weak self] in self?.slider.maxValue = Double($0) }
+            .sink { [weak self] in
+                self?.slider.maxValue = Double($0)
+                self?.endFrameLabel.stringValue = "/\(Int($0))"
+            }
             .store(in: &cancellables)
 
         viewModel.onFrameTimeChanged
@@ -58,21 +62,13 @@ class PlayerViewController: NSViewController {
             .sink { [weak self] in self?.playerView.playOrPause() }
             .store(in: &cancellables)
 
-        viewModel.$currentFrameTime
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] in self?.slider.integerValue = Int($0) }
-            .store(in: &cancellables)
-
-        slider
-            .publisher(for: \.integerValue)
-            .sink { [weak self] in self?.frameLabel.stringValue = String($0) }
-            .store(in: &cancellables)
-
         Timer.publish(every: 0.01, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
                 guard let frameTime = self?.playerView.currentFrame else { return }
-                self?.slider.integerValue = Int(frameTime)
+                let value = Int(frameTime)
+                self?.slider.integerValue = value
+                self?.currentFrameLabel.stringValue = "\(value)"
             }
             .store(in: &cancellables)
 

@@ -17,7 +17,6 @@ struct FrameTimeRange {
 
 final class PlayerViewModel {
     @Published var windowTitle: String = "LottiePlayer"
-    @Published var currentFrameTime: AnimationFrameTime = 0
 
     let onSpaceKeyDown = PassthroughSubject<Void, Never>()
     let onAnimationChanged = PassthroughSubject<Animation, Never>()
