@@ -12,7 +12,7 @@ LottiePlayer — a [Lottie](https://airbnb.design/lottie/) animation player for 
 ## Features
 - Open Lottie JSON File
 
-## Keyboard shortcuts
+### Keyboard shortcuts
 Shortcut | Action
 -------- | ------------- 
 Space bar | Play or Pause
