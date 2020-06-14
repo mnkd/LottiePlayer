@@ -9,6 +9,20 @@ LottiePlayer — a [Lottie](https://airbnb.design/lottie/) animation player for 
 
 ( Animaiton: [yellow animation by John Olm](https://lottiefiles.com/23495-yellow-animation) )
 
+## Features
+- Open Lottie JSON File
+
+## Keyboard shortcuts
+Shortcut | Action
+-------- | ------------- 
+Space bar | Play or Pause
+Left Arrow  | Backward 1 frame
+Right Arrow | Forkward 1 frame
+Option-Left Arrow | Backward 10 frames
+Option-Right Arrow| Forkward 10 frames
+Command-Left Arrow  | Go to the beginning of a animation
+Command-Right Arrow | Go to the end of a animation
+
 # Installation
 To install the latest version of LottiePlayer, you can download [here](https://github.com/mnkd/LottiePlayer/releases).
 
@@ -18,7 +32,7 @@ To install the latest version of LottiePlayer, you can download [here](https://g
 - Xcode 11.5
 - Swift 5.2
 - CocoaPods
-    - [lottie-ios]()
+    - [lottie-ios](https://github.com/airbnb/lottie-ios)
 
 ## How to build
 1. `$ bundle install --path vendor/bundle`
