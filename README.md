@@ -1,7 +1,7 @@
 # LottiePlayer
-[![GitHub release](https://img.shields.io/github/release/mnkd/LottiePlayer.svg)](https://github.com/mnkd/LottiePlayer/releases/latest)
+[![GitHub release](https://img.shields.io/github/v/release/mnkd/LottiePlayer)](https://github.com/mnkd/LottiePlayer/releases/latest)
 
-LottiePlayer is a [Lottie](https://airbnb.design/lottie/) animation player for macOS
+LottiePlayer — a [Lottie](https://airbnb.design/lottie/) animation player for macOS
 
 - **Requirement**: macOS 10.15 Catalina or later
 
