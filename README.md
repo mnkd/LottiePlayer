@@ -7,19 +7,19 @@ LottiePlayer — a [Lottie](https://airbnb.design/lottie/) animation player for 
 
 <img src="https://user-images.githubusercontent.com/4963478/84585469-05b8d180-ae4b-11ea-93e6-b1bd3728336a.png" width="496"/>
 
-( Animaiton: [yellow animation by John Olm](https://lottiefiles.com/23495-yellow-animation) )
+( Animation: [yellow animation by John Olm](https://lottiefiles.com/23495-yellow-animation) )
 
 ## Features
-- Open Lottie JSON File
+- Preview Lottie animaiton
 
 ### Keyboard shortcuts
 Shortcut | Action
 -------- | ------------- 
 Space bar | Play or Pause
 Left Arrow  | Backward 1 frame
-Right Arrow | Forkward 1 frame
+Right Arrow | Forward 1 frame
 Option-Left Arrow | Backward 10 frames
-Option-Right Arrow| Forkward 10 frames
+Option-Right Arrow| Forward 10 frames
 Command-Left Arrow  | Go to the beginning of a animation
 Command-Right Arrow | Go to the end of a animation
 
