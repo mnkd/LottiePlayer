@@ -7,7 +7,9 @@ target 'LottiePlayer' do
 
   # Pods for LottiePlayer
   pod 'lottie-ios'
-
+  pod 'SwiftFormat/CLI'
+  pod 'SwiftLint'
+  
   target 'LottiePlayerTests' do
     inherit! :search_paths
     # Pods for testing

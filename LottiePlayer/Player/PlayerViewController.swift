@@ -1,7 +1,7 @@
 //
 //  PlayerViewController.swift
-//  
-//  
+//
+//
 //  Created by Mitsuru Nakada on 2020/05/30.
 //  Copyright © 2020 Mitsuru Nakada. All rights reserved.
 //
@@ -11,21 +11,15 @@ import Combine
 import Lottie
 
 class PlayerViewController: NSViewController {
-    @IBOutlet private weak var playerView: PlayerView!
-    @IBOutlet private weak var draggingDestinationView: DraggingDestinationView!
-    @IBOutlet private weak var slider: NSSlider!
-    @IBOutlet private weak var currentFrameLabel: NSTextField!
-    @IBOutlet private weak var endFrameLabel: NSTextField!
-
-    private var cancellables = Set<AnyCancellable>()
-    private let viewModel = PlayerViewModel()
-    private var keyDownMonitor: Any?
+    // MARK: Lifecycle
 
     deinit {
         if let monitor = self.keyDownMonitor {
             NSEvent.removeMonitor(monitor)
         }
     }
+
+    // MARK: Internal
 
     override var representedObject: Any? {
         didSet {
@@ -84,7 +78,19 @@ class PlayerViewController: NSViewController {
             .store(in: &cancellables)
     }
 
-    @IBAction func sliderAction(_ sender: NSSlider) {
+    // MARK: Private
+
+    @IBOutlet private var playerView: PlayerView!
+    @IBOutlet private var draggingDestinationView: DraggingDestinationView!
+    @IBOutlet private var slider: NSSlider!
+    @IBOutlet private var currentFrameLabel: NSTextField!
+    @IBOutlet private var endFrameLabel: NSTextField!
+
+    private var cancellables = Set<AnyCancellable>()
+    private let viewModel = PlayerViewModel()
+    private var keyDownMonitor: Any?
+
+    @IBAction private func sliderAction(_ sender: NSSlider) {
         let frameTime = AnimationFrameTime(sender.integerValue)
         playerView.play(fromFrame: frameTime, toFrame: frameTime)
     }

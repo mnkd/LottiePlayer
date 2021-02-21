@@ -1,0 +1,45 @@
+# SwiftFormat Settings
+
+--swiftversion 5.2
+
+# file options
+--exclude Pods
+
+# format options
+
+# --binarygrouping none
+--closingparen balanced
+--commas inline
+--header ignore
+--ifdef no-indent
+--importgrouping testable-bottom
+--indent 4
+--indentcase false
+--linebreaks lf
+--maxwidth none
+--nospaceoperators ..<, ...
+--operatorfunc spaced
+--self remove
+--semicolons inline
+--stripunusedargs closure-only
+--trimwhitespace always
+--wraparguments before-first
+--wrapcollections before-first
+
+# rules
+--enable anyObjectProtocol
+--enable redundantParens
+--enable redundantReturn
+--enable redundantSelf
+--enable sortedImports
+--enable strongifiedSelf
+--enable trailingCommas
+--enable trailingSpace
+--enable wrapArguments
+--enable wrapMultilineStatementBraces
+--enable indent
+--enable wrapAttributes
+--enable organizeDeclarations
+--enable markTypes
+--enable extensionAccessControl
+--enable duplicateImports

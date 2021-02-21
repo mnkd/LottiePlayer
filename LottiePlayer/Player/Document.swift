@@ -1,7 +1,7 @@
 //
 //  Document.swift
 //  LottiePlayer
-//  
+//
 //  Created by Mitsuru Nakada on 2020/05/31.
 //  Copyright © 2020 Mitsuru Nakada. All rights reserved.
 //

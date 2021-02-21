@@ -1,7 +1,7 @@
 //
 //  DraggingDestinationDelegate.swift
 //  LottiePlayer
-//  
+//
 //  Created by Mitsuru Nakada on 2020/05/30.
 //  Copyright © 2020 Mitsuru Nakada. All rights reserved.
 //
@@ -11,24 +11,20 @@ import Combine
 import os.log
 
 final class DraggingDestinationView: NSView {
+    // MARK: Lifecycle
+
+    deinit {
+        unregisterDraggedTypes()
+    }
+
+    // MARK: Internal
+
     let onFileURLDropped = PassthroughSubject<URL, Never>()
 
     var isLabelHidden: Bool = false {
         didSet {
             dropHereView.isHidden = isLabelHidden
         }
-    }
-
-    private var isDragging: Bool = false {
-        didSet {
-            needsDisplay = true
-        }
-    }
-
-    @IBOutlet private weak var dropHereView: NSView!
-
-    deinit {
-        unregisterDraggedTypes()
     }
 
     override func awakeFromNib() {
@@ -46,10 +42,6 @@ final class DraggingDestinationView: NSView {
 
         color.set()
         path.stroke()
-    }
-
-    private func shouldAllowDrop(_ draggingInfo: NSDraggingInfo) -> Bool {
-        retrieveJSONFileURL(draggingInfo) != nil
     }
 
     // MARK: - NSDraggingDestination
@@ -80,14 +72,28 @@ final class DraggingDestinationView: NSView {
         isDragging = false
     }
 
-    // MARK: - private
+    // MARK: Private
+
+    @IBOutlet private var dropHereView: NSView!
+
+    private var isDragging: Bool = false {
+        didSet {
+            needsDisplay = true
+        }
+    }
+
+    private func shouldAllowDrop(_ draggingInfo: NSDraggingInfo) -> Bool {
+        retrieveJSONFileURL(draggingInfo) != nil
+    }
 
     private func retrieveJSONFileURL(_ draggingInfo: NSDraggingInfo) -> URL? {
         let pboard = draggingInfo.draggingPasteboard
         let klass = [NSURL.self]
 
-        guard pboard.canReadObject(forClasses: klass, options: nil),
-              let urls = pboard.readObjects(forClasses: klass, options: nil) as? [URL] else {
+        guard
+            pboard.canReadObject(forClasses: klass, options: nil),
+            let urls = pboard.readObjects(forClasses: klass, options: nil) as? [URL]
+        else {
             return nil
         }
 

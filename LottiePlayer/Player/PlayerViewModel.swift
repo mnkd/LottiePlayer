@@ -1,7 +1,7 @@
 //
 //  PlayerViewModel.swift
 //  LottiePlayer
-//  
+//
 //  Created by Mitsuru Nakada on 2020/05/30.
 //  Copyright © 2020 Mitsuru Nakada. All rights reserved.
 //
@@ -10,19 +10,24 @@ import Cocoa
 import Combine
 import Lottie
 
+// MARK: - FrameTimeRange
+
 struct FrameTimeRange {
     let from: AnimationFrameTime
     let to: AnimationFrameTime
 }
 
+// MARK: - PlayerViewModel
+
 final class PlayerViewModel {
+    // MARK: Internal
+
     @Published var windowTitle: String = "LottiePlayer"
 
     let onSpaceKeyDown = PassthroughSubject<Void, Never>()
     let onAnimationChanged = PassthroughSubject<Animation, Never>()
     let onAnimationEndFrameChanged = PassthroughSubject<AnimationFrameTime, Never>()
     let onFrameTimeChanged = PassthroughSubject<FrameTimeRange, Never>()
-    private var animation: Animation?
 
     var fileURL: URL? {
         didSet {
@@ -62,7 +67,7 @@ final class PlayerViewModel {
             frameTime = option ? animation.endFrame : frameTime
 
         case KeyCode.space.rawValue:
-            onSpaceKeyDown.send(Void())
+            onSpaceKeyDown.send(())
             return
 
         default:
@@ -71,4 +76,8 @@ final class PlayerViewModel {
 
         onFrameTimeChanged.send(FrameTimeRange(from: frameTime, to: frameTime))
     }
+
+    // MARK: Private
+
+    private var animation: Animation?
 }

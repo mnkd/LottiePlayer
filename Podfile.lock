@@ -1,16 +1,24 @@
 PODS:
   - lottie-ios (3.1.8)
+  - SwiftFormat/CLI (0.47.11)
+  - SwiftLint (0.42.0)
 
 DEPENDENCIES:
   - lottie-ios
+  - SwiftFormat/CLI
+  - SwiftLint
 
 SPEC REPOS:
   trunk:
     - lottie-ios
+    - SwiftFormat
+    - SwiftLint
 
 SPEC CHECKSUMS:
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
+  SwiftFormat: 6f2fd4689e09959ba5b690ab950279e33eb6441e
+  SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
 
-PODFILE CHECKSUM: 90769c8370afab944fbba41a23c15456dfb78faa
+PODFILE CHECKSUM: fec5efe70839a3d6a32ac68d6414c19fc187d02f
 
 COCOAPODS: 1.9.3
