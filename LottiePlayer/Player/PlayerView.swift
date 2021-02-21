@@ -21,9 +21,9 @@ class PlayerView: NSView {
         NotificationCenter.default
             .publisher(for: NSWindow.didResizeNotification)
             .subscribe(on: DispatchQueue.main)
-            .sink { [weak self] notif in
+            .sink { [weak self] notification in
                 guard let self = self else { return }
-                guard let object = notif.object as? NSWindow, let window = self.window else { return }
+                guard let object = notification.object as? NSWindow, let window = self.window else { return }
                 guard object == window else { return }
 
                 let rect = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)

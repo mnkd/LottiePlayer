@@ -188,6 +188,7 @@
 				2778A12CB9DDD3477CEE643C /* [CP] Check Pods Manifest.lock */,
 				4DF17A7B25E272B00088A5A6 /* SwiftFormat */,
 				4DF17A7A25E272780088A5A6 /* SwiftLint */,
+				4DF17A9525E279970088A5A6 /* Spell Checker */,
 				4D0CAC562481A48A00DC2BFC /* Sources */,
 				4D0CAC572481A48A00DC2BFC /* Frameworks */,
 				4D0CAC582481A48A00DC2BFC /* Resources */,
@@ -392,6 +393,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftformat >/dev/null; then\n  \"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"$SRCROOT\"\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+		};
+		4DF17A9525E279970088A5A6 /* Spell Checker */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Spell Checker";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if !(which SpellChecker > /dev/null); then\n    echo \"warning: SpellChecker not installed.\" \n    exit 0\nfi\n\nfiles=$(git diff --diff-filter=d --name-only -- \"*.swift\")\nif (test -z $files) || (test ${#files[@]} -eq 0); then\n  echo \"SpellChecker: no files changed.\"\n  exit 0\nfi\n\noptions=\"\"\nfor file in $files\ndo\n  options=\"$options $SRCROOT/$file\"\ndone\n\nSpellChecker --yml \"$SRCROOT/.spell-checker.yml\" -- $options\n";
 		};
 		8DB7231DDDB26A916058E8FE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -636,7 +655,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = CFQNNV56V3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = LottiePlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

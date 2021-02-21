@@ -98,7 +98,7 @@ final class DraggingDestinationView: NSView {
         }
 
         // not support multiple files
-        let filterd = urls.filter { $0.pathExtension == "json" }
-        return filterd.count == 1 ? filterd.first! : nil
+        let filtered = urls.filter { $0.pathExtension == "json" }
+        return filtered.count == 1 ? filtered.first! : nil
     }
 }

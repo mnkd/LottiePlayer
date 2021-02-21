@@ -1,0 +1,8 @@
+whiteList:
+  - autoconnect
+  - cancellable
+  - cancellables
+  - deinit
+  - lottie
+  - mitsuru
+  - nakada
