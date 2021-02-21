@@ -16,7 +16,9 @@ class Document: NSDocument {
 
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
         let id = NSStoryboard.SceneIdentifier("WindowController")
-        guard let windowController = storyboard.instantiateController(withIdentifier: id) as? NSWindowController else { return }
+        guard let windowController = storyboard.instantiateController(withIdentifier: id) as? NSWindowController else {
+            return
+        }
         addWindowController(windowController)
 
         if let contentVC = windowController.contentViewController {
