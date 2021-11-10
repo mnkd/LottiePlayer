@@ -97,3 +97,8 @@ vendor/
 # App Bundle
 LottiePlayer.zip
 
+# Mint
+#
+# A package manager that installs and runs Swift command line tool packages.
+# https://github.com/yonaskolb/Mint
+Mint/
