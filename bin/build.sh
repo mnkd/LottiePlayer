@@ -9,7 +9,7 @@ COMMAND_NAME=`basename $0`
 
 # Parameter for xcodebuild
 CONFIGURATION="Release"
-ARCH="x86_64"
+# ARCH="x86_64 arm64"
 INSTALL_PATH="/Applications"
 
 BUNDLE_ID="com.mnkd.LottiePlayer"
@@ -18,7 +18,7 @@ DSTROOT="/tmp/${SCHEME}.dst"
 DERIVED_DATA_PATH="/tmp/${SCHEME}.derivedData"
 PROJECT_ROOT="LottiePlayer"
 ZIP_NAME="LottiePlayer.zip"
-WORKSPACE="${PROJECT_ROOT}.xcworkspace"
+PROJECT="${PROJECT_ROOT}.xcodeproj"
 INFOPLIST_FILE="${PROJECT_ROOT}/Info.plist"
 MINIMUM_SYSTEM_VERSION="10.15"
 
@@ -28,17 +28,6 @@ set +x
 # --------------------------------------------------
 # Build Application Bundle
 # --------------------------------------------------
-
-echo
-echo "-------------------------"
-echo "CocoaPods"
-echo "-------------------------"
-echo
-echo "pod install"
-echo
-
-cd ${PROJECT_ROOT}; bundle exec pod install
-cd ..
 
 # echo
 # echo "-------------------------"
@@ -64,13 +53,12 @@ echo
 echo "<< clean >>"
 echo
 xcodebuild \
-  -workspace "${WORKSPACE}" \
+  -project "${PROJECT}" \
   -scheme "${SCHEME}" \
   -configuration "${CONFIGURATION}" \
-  -arch "${ARCH}" \
   -derivedDataPath "${DERIVED_DATA_PATH}" \
   DSTROOT="${DSTROOT}" \
-  INSTALL_PATH="${INSTALL_PATH}" clean | bundle exec xcpretty
+  INSTALL_PATH="${INSTALL_PATH}" clean | ./Mint/bin/xcbeautify
 
 # Workaround:
 # fatal error: file '/tmp/LottiePlayer.dst/usr/local/include/XXXX.h' has been modified since the precompiled
@@ -83,13 +71,12 @@ echo
 echo "<< build >>"
 echo
 xcodebuild \
-  -workspace "${WORKSPACE}" \
+  -project "${PROJECT}" \
   -scheme "${SCHEME}" \
   -configuration "${CONFIGURATION}" \
-  -arch "${ARCH}" \
   -derivedDataPath "${DERIVED_DATA_PATH}" \
   DSTROOT="${DSTROOT}" \
-  INSTALL_PATH="${INSTALL_PATH}" install | bundle exec xcpretty
+  INSTALL_PATH="${INSTALL_PATH}" install | ./Mint/bin/xcbeautify
 
 # Check whether build succeeded
 if [ $? != 0 ]
