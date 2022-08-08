@@ -26,7 +26,6 @@ exec-swiftformat: ## swiftformat を実行します。
 	$(eval SWIFT_VERSION := $(shell swift --version | tr ' ' '\n' | head -n 4 | tail -n 1))
 	./Mint/bin/swiftformat "./LottiePlayer/" --swiftversion $(SWIFT_VERSION)
 
-
 .PHONY: install-brew
 install-brew: ## brew で管理するツールを導入します。
 	brew list mint &>/dev/null || brew install mint
