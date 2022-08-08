@@ -1,16 +1,14 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Lottie",
-        "repositoryURL": "https://github.com/airbnb/lottie-ios",
-        "state": {
-          "branch": "lottie/macos-spm",
-          "revision": "f4d701070f9743b9ef7b9ac42d386d1ef98b842f",
-          "version": null
-        }
+  "pins" : [
+    {
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-ios",
+      "state" : {
+        "revision" : "b04b773957e3e359730590c2e7c16d8c3874ec50",
+        "version" : "3.4.1"
       }
-    ]
-  },
-  "version": 1
+    }
+  ],
+  "version" : 2
 }
