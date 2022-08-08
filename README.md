@@ -35,7 +35,7 @@ To install the latest version of LottiePlayer, you can download [here](https://g
 1. `$ make bootstrap`
 2. `$ make build`
 
-## Develop the app
+## How to develop
 1. `$ make bootstrap`
 2. `$ make open`
 
