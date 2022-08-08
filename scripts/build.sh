@@ -101,18 +101,11 @@ echo "rm -rf ${DSTROOT}"
 rm -rf "${DSTROOT}"
 
 echo
-echo "*** DONE ***"
-echo
-
-exit 0
-
-
-echo
 echo "---------------------------------"
 echo "Notarize App"
 echo "---------------------------------"
-echo "xcrun altool --notarize-app -p "@keychain:AC_ITEM" --primary-bundle-id ${BUNDLE_ID} --file ${ZIP_NAME}"
-xcrun altool --notarize-app -p "@keychain:AC_ITEM" --primary-bundle-id ${BUNDLE_ID} --file ${ZIP_NAME}
+echo "xcrun notarytool submit LottiePlayer.zip --wait --keychain-profile AC_ITEM"
+xcrun notarytool submit LottiePlayer.zip --wait --keychain-profile "AC_ITEM"
 
 echo "wait around 2 minutes"
 date
