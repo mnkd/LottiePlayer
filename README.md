@@ -3,7 +3,7 @@
 
 LottiePlayer — a [Lottie](https://airbnb.design/lottie/) animation player for macOS
 
-- **Requirement**: macOS 10.15 Catalina or later
+- **Requirement**: macOS 12.0 or later
 
 <img src="https://user-images.githubusercontent.com/4963478/84585469-05b8d180-ae4b-11ea-93e6-b1bd3728336a.png" width="496"/>
 
@@ -28,17 +28,16 @@ To install the latest version of LottiePlayer, you can download [here](https://g
 
 # Development
 ## Environment
-- macOS 10.15 Catalina
-- Xcode 11.5
-- Swift 5.2
-- CocoaPods
-    - [lottie-ios](https://github.com/airbnb/lottie-ios)
+- macOS 12.5
+- Xcode 13.3.1
 
 ## How to build
-1. `$ bundle install --path vendor/bundle`
-2. `$ bundle exec pod install`
-3. Open `LottiePlayer.xcworkspace` in Xcode
-4. Build
+1. `$ make bootstrap`
+2. `$ make build`
+
+## Develop the app
+1. `$ make bootstrap`
+2. `$ make open`
 
 License
 ===
