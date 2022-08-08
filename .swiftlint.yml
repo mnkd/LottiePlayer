@@ -7,10 +7,6 @@
 included:
   - LottiePlayer/
 
-excluded:
-  - Pods
-  - vendor
-
 # analyzer_rules:
 #   - explicit_self
 #   - unused_declaration
