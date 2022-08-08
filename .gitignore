@@ -102,3 +102,6 @@ LottiePlayer.zip
 # A package manager that installs and runs Swift command line tool packages.
 # https://github.com/yonaskolb/Mint
 Mint/
+
+# VS Code
+.vscode
