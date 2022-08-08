@@ -101,6 +101,13 @@ echo "rm -rf ${DSTROOT}"
 rm -rf "${DSTROOT}"
 
 echo
+echo "*** DONE ***"
+echo
+
+exit 0
+
+
+echo
 echo "---------------------------------"
 echo "Notarize App"
 echo "---------------------------------"
