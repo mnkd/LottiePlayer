@@ -21,7 +21,7 @@ final class DraggingDestinationView: NSView {
 
     let onFileURLDropped = PassthroughSubject<URL, Never>()
 
-    var isLabelHidden: Bool = false {
+    var isLabelHidden = false {
         didSet {
             dropHereView.isHidden = isLabelHidden
         }
@@ -76,7 +76,7 @@ final class DraggingDestinationView: NSView {
 
     @IBOutlet private var dropHereView: NSView!
 
-    private var isDragging: Bool = false {
+    private var isDragging = false {
         didSet {
             needsDisplay = true
         }
