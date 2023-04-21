@@ -104,10 +104,9 @@ echo
 echo "---------------------------------"
 echo "Notarize App"
 echo "---------------------------------"
-echo "xcrun notarytool submit LottiePlayer.zip --wait --keychain-profile AC_ITEM"
-xcrun notarytool submit LottiePlayer.zip --wait --keychain-profile "AC_ITEM"
+echo "xcrun notarytool submit ${ZIP_NAME} --wait --keychain-profile AC_ITEM"
+xcrun notarytool submit ${ZIP_NAME} --wait --keychain-profile "AC_ITEM"
 
-echo "wait around 2 minutes"
 date
 
 echo
