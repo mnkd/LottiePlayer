@@ -39,6 +39,11 @@ class PlayerView: NSView {
         newView.loopMode = .playOnce
         newView.contentMode = .scaleAspectFit
         newView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+
+        #if DEBUG
+        newView.logHierarchyKeypaths()
+        #endif
+
         addSubview(newView)
         animationView = newView
     }
