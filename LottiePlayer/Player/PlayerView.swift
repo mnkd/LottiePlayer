@@ -32,13 +32,18 @@ class PlayerView: NSView {
             .store(in: &cancellables)
     }
 
-    func setUpAnimation(_ animation: Animation) {
+    func setUpAnimation(_ animation: LottieAnimation) {
         animationView?.removeFromSuperview()
 
-        let newView = AnimationView(animation: animation)
+        let newView = LottieAnimationView(animation: animation)
         newView.loopMode = .playOnce
         newView.contentMode = .scaleAspectFit
         newView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+
+        #if DEBUG
+        newView.logHierarchyKeypaths()
+        #endif
+
         addSubview(newView)
         animationView = newView
     }
@@ -66,6 +71,6 @@ class PlayerView: NSView {
 
     // MARK: Private
 
-    private var animationView: AnimationView?
+    private var animationView: LottieAnimationView?
     private var cancellables = Set<AnyCancellable>()
 }
