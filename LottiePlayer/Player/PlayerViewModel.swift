@@ -25,7 +25,7 @@ final class PlayerViewModel {
     @Published var windowTitle: String = "LottiePlayer"
 
     let onSpaceKeyDown = PassthroughSubject<Void, Never>()
-    let onAnimationChanged = PassthroughSubject<Animation, Never>()
+    let onAnimationChanged = PassthroughSubject<LottieAnimation, Never>()
     let onAnimationEndFrameChanged = PassthroughSubject<AnimationFrameTime, Never>()
     let onFrameTimeChanged = PassthroughSubject<FrameTimeRange, Never>()
 
@@ -34,7 +34,7 @@ final class PlayerViewModel {
             if let url = fileURL {
                 windowTitle = url.lastPathComponent
 
-                if let animation = Animation.filepath(url.path) {
+                if let animation = LottieAnimation.filepath(url.path) {
                     self.animation = animation
                     onAnimationChanged.send(animation)
                     onAnimationEndFrameChanged.send(animation.endFrame)
@@ -79,5 +79,5 @@ final class PlayerViewModel {
 
     // MARK: Private
 
-    private var animation: Animation?
+    private var animation: LottieAnimation?
 }

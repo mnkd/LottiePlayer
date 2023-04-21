@@ -758,7 +758,7 @@
 			repositoryURL = "https://github.com/airbnb/lottie-ios";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				minimumVersion = 3.5.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
